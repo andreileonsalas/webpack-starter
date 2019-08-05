@@ -43,3 +43,39 @@ Array.from(elements).forEach((el) => {
   el.style.color='red';
   console.log(el.tagName);
 });
+
+//edicion de elementos en el dom
+
+element.textContent = 'new text here';
+element.setAttribute('name', 'namevalue');
+element.classList.add('yatusabe');
+element.style.color = 'green';
+
+
+let xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function (){
+  if (this.readyState == 4 && this.status == 200){
+    console.log(this.responseText);
+  }
+};
+
+let xhttp2 = new XMLHttpRequest();
+xhttp2.onreadystatechange = function (){
+  if (this.readyState == 4 && this.status == 200){
+    console.log(this.responseText);
+  }
+};
+
+xhttp.open("GET","https://jsonplaceholder.typicode.com/todos/1",true);
+xhttp.send();
+
+
+xhttp2.open("POST","https://jsonplaceholder.typicode.com/posts",true);
+
+xhttp2.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+var params = JSON.stringify({
+  title: 'foo',
+  body: 'bar',
+  userId: 1
+});
+xhttp2.send(params);
