@@ -79,3 +79,46 @@ var params = JSON.stringify({
   userId: 1
 });
 xhttp2.send(params);
+
+//interceptar form
+
+
+import $ from 'jquery';
+let form = document.getElementById('user-form');
+
+form.addEventListener('submit', event => {
+  let user = form.elements['user'];
+  let avatarfile = form.elements['avatar-file'];
+  let userError = document.getElementById('user-error');
+
+  if (user.value.length < 4) {
+  userError.textContent = 'Invalid entry';
+  userError.style.color = 'red';
+  user.style.borderColor = 'red';
+  user.focus();
+  };
+
+
+
+  
+	let posting = {
+		user: user.value,
+		avatarFile: avatarFile.value
+	};
+	
+	let promise = $.post(
+		"http://5b32a4fd82407e001413f1df.mockapi.io/api/v1/users", posting
+	);
+	promise.then(
+	    data => console.log('success: ', data),
+	    error => console.log('error: ', error)
+	);
+	
+
+  
+
+  console.log(user.value,avatarfile.value);
+  event.preventDefault();
+
+
+});
